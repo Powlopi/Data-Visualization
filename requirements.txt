@@ -1,4 +1,4 @@
 dash
-pandas
+pandas>=2.0.0
 plotly
 gunicorn
