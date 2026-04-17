@@ -50,16 +50,21 @@ def update_graph(selected_coffees):
         
     filtered_df = weekly_sales[weekly_sales['coffee_name'].isin(selected_coffees)]
     
-    # Notice we changed template='plotly_white' to 'plotly_dark'
     fig = px.line(
         filtered_df, x='Date', y='money', color='coffee_name', markers=True,
         title='Weekly Coffee Revenue', template='plotly_dark',
         labels={'money': 'Revenue ($)', 'Date': 'Date', 'coffee_name': 'Coffee Type'}
     )
     
-    # paper_bgcolor and plot_bgcolor make the graph transparent to blend with the Dash theme
     fig.update_layout(
         hovermode="x unified", 
+        # --- NEW CODE: Forces the hover box to be dark grey with white text ---
+        hoverlabel=dict(
+            bgcolor="#2b2b2b", 
+            font_color="white",
+            bordercolor="#888888"
+        ),
+        # ----------------------------------------------------------------------
         margin=dict(l=20, r=20, t=50, b=20),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)'
